@@ -7,7 +7,7 @@ Simple wrapper for Whisper which:
 
 ## Installation
 ```sh
-cargo install --git github.com:Kozlov-TranscriBot/transcribot-whisper-wrapper.git
+cargo install --git https://github.com/Kozlov-TranscriBot/transcribot-whisper-wrapper
 ```
 
 ## Usage
