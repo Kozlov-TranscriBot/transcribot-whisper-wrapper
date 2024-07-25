@@ -1,8 +1,8 @@
 use std::{env::args, fs::{remove_file, File}, io::Read, process::{Command, Stdio}};
 
 pub struct WhisperArgs {
-    pub lang: String,
-    pub file_path: String
+    lang: String,
+    file_path: String
 }
 
 impl WhisperArgs {
@@ -23,7 +23,7 @@ impl WhisperArgs {
         }
     }
 
-    pub fn new() -> Self {
+    pub fn from_cmd() -> Self {
         let args: Vec<String> = args().collect();
         if args.len() < 3 {
             panic!("Specify language code and audio file path")
@@ -31,6 +31,13 @@ impl WhisperArgs {
         WhisperArgs {
             lang: args[1].clone(),
             file_path: args[2].clone()
+        }
+    }
+
+    pub fn new(lang: &str, file_path: &str) -> Self {
+        WhisperArgs {
+            lang: String::from(lang),
+            file_path: String::from(file_path)
         }
     }
 
