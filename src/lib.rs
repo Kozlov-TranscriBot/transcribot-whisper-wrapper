@@ -34,10 +34,10 @@ impl WhisperArgs {
         }
     }
 
-    pub fn new(lang: &str, file_path: &str) -> Self {
+    pub fn new(lang: String, file_path: String) -> Self {
         WhisperArgs {
-            lang: String::from(lang),
-            file_path: String::from(file_path)
+            lang: lang,
+            file_path: file_path
         }
     }
 
