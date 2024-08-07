@@ -2,7 +2,8 @@ use std::{env::args, fs::{remove_file, File}, io::Read, process::{Command, Stdio
 
 pub struct WhisperArgs {
     lang: String,
-    file_path: String
+    file_path: String,
+    filename: String
 }
 
 impl WhisperArgs {
@@ -28,16 +29,23 @@ impl WhisperArgs {
         if args.len() < 3 {
             panic!("Specify language code and audio file path")
         }
+        let path = args[2].clone();
         WhisperArgs {
             lang: args[1].clone(),
-            file_path: args[2].clone()
+            file_path: path.clone(),
+            filename: String::from(path.split('/').last().expect(
+                "There's not a valid path to file"
+            ))
         }
     }
 
     pub fn new(lang: String, file_path: String) -> Self {
         WhisperArgs {
             lang: lang,
-            file_path: file_path
+            file_path: file_path.clone(),
+            filename: String::from(file_path.split('/').last().expect(
+                "There's not a valid path to file"
+            ))
         }
     }
 
@@ -52,7 +60,7 @@ impl WhisperArgs {
             .status()
             .expect("Error in whisper");
         if whisper_exit_status.success() {
-            Ok(Self::read_file(format!("{}/{}.txt", output_dir, self.file_path).as_str()))
+            Ok(Self::read_file(format!("{}/{}.txt", output_dir, self.filename).as_str()))
         } else {
             Err(format!("Failed to process audio. Exit code {}", whisper_exit_status.to_string()))
         }
