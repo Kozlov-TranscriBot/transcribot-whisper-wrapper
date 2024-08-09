@@ -3,5 +3,5 @@
 version = 3
 
 [[package]]
-name = "transcribot-whisper-wrapper"
-version = "0.2.0"
+name = "whisper-wrapper"
+version = "0.3.0"

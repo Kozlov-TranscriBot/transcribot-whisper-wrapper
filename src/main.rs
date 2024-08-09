@@ -1,9 +1,13 @@
-use transcribot_whisper_wrapper::WhisperArgs;
+use whisper_wrapper::WhisperArgs;
 
 fn main() {
-    let w_args = WhisperArgs::from_cmd();
-    let res = w_args.run_whisper().unwrap_or_else(|err| {
-        panic!("{err}");
-    });
-    println!("{res}")
+    match WhisperArgs::from_cmd() {
+        Ok(w_args) => {
+            let res = w_args.run_whisper().unwrap_or_else(|err| {
+                panic!("{err}");
+            });
+            println!("{res}") 
+        },
+        Err(error_message) => panic!("{}", error_message)
+    }
 }
